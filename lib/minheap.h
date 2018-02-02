@@ -1,4 +1,3 @@
-#include "priorityqueue.h"
 #ifndef MINHEAP_H
 #define MINHEAP_H
 

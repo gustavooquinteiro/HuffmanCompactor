@@ -13,7 +13,7 @@ H_SOURCE = $(wildcard ./lib/*.h)
 OBJ = $(subst .c,.o,$(subst src,obj,$(C_SOURCE)))
 
 # Compilador utilizado
-# Em testes foi utilizado o: gcc (GCC) 7.2.1 20171224
+# Em testes foi utilizado o gcc (GCC) 7.2.1 20180116
 CC = gcc
 
 # Flags utilizadas na compilação
@@ -61,6 +61,7 @@ clean:
 	@ $(RM) obj $(PROJ_NAME) *~
 	@ echo -e "[${GREEN} OK ${NC}]  Clean workspace"
 
+# Regra para adição de autores (lembrete:: tirar essa regra antes de entregar) 
 authors:
-	@ echo -e "This is the list of $(PROJ_NAME) authors for copyright purposes.\nThis does not necessarily list everyone who has contributed code,\nsince in some cases, their employer may be the copyright holder.\nTo see the full list of contributors, see the revision history in source control.\n" > AUTHORS
+	@ echo -e "This is the list of $(PROJ_NAME) authors for copyright purposes:\n" > AUTHORS
 	@ git log --raw | grep "^Author: " | sort | uniq | cut -d ' ' -f2- | sed 's/^/- /' >> AUTHORS
