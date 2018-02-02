@@ -13,7 +13,7 @@ H_SOURCE = $(wildcard ./lib/*.h)
 OBJ = $(subst .c,.o,$(subst src,obj,$(C_SOURCE)))
 
 # Compilador utilizado
-# Em testes foi utilizado o: gcc (GCC) 7.2.1 20171224 
+# Em testes foi utilizado o: gcc (GCC) 7.2.1 20171224
 CC = gcc
 
 # Flags utilizadas na compilação
@@ -31,8 +31,8 @@ MKDIR = mkdir -p
 # Comando de limpeza de alvos
 RM = rm -rf
 
-GREEN=\033[0;32m
-NC=\033[0m
+GREEN = \033[0;32m
+NC = \033[0m
 
 .PHONY: all clean
 
@@ -40,23 +40,27 @@ NC=\033[0m
 all: objFolder $(PROJ_NAME)
 
 $(PROJ_NAME): $(OBJ)
-	@ echo -e "	Construindo binário $@..."
+	@ echo -e "	Building binary $@..."
 	@ $(CC) $^ -o $@
-	@ echo -e " [${GREEN} OK ${NC}] Construido binário $@"
+	@ echo -e "[${GREEN} OK ${NC}]  Build complete"
 
 ./obj/%.o: ./src/%.c ./lib/%.h
-	@ echo -e "	Compilando $<..."
+	@ echo -e "	Compiling $^ in $@..."
 	@ $(CC) $< $(CC_FLAGS) -o $@
-	@ echo -e  " [${GREEN} OK ${NC}] Compilado $@"
+	@ echo -e  "[${GREEN} OK ${NC}]  Compiled"
 
 # Regra de criação de diretório para os objetos
 objFolder:
-	@ echo "	Criando diretório para objetos..."
+	@ echo "	Creating directory for object files..."
 	@ $(MKDIR) obj
-	@ echo -e " [${GREEN} OK ${NC}] Diretório para objetos criado"
+	@ echo -e -n "[${GREEN} OK ${NC}]  Created obj directory in " && pwd
 
 # Regra de limpeza de objetos e executável
 clean:
-	@ echo -e "	Limpando sujeira criada... "
+	@ echo -e "	Cleaning workspace... "
 	@ $(RM) obj $(PROJ_NAME) *~
-	@ echo -e " [${GREEN} OK ${NC}] Workspace limpo"
+	@ echo -e "[${GREEN} OK ${NC}]  Clean workspace"
+
+authors:
+	@ echo -e "This is the list of $(PROJ_NAME) authors for copyright purposes.\nThis does not necessarily list everyone who has contributed code,\nsince in some cases, their employer may be the copyright holder.\nTo see the full list of contributors, see the revision history in source control.\n" > AUTHORS
+	@ git log --raw | grep "^Author: " | sort | uniq | cut -d ' ' -f2- | sed 's/^/- /' >> AUTHORS
