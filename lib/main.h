@@ -6,9 +6,12 @@
 #define NONEXISTENT_FILE "Need file(s) to be compressed\n"
 #define READ_MODE "r"
 #define WRITE_MODE "w"
+#define EXTENSION ".dcc"
 
-
-int main (int argc, char*argv[]);
-
+int main (int argumentCounter, char * argumentValues[]);
+int isValidFile(FILE * archive, char * filename);
+int isCompactedFile(char * filename);
+void compress(FILE * file);
+void decompress(FILE * file);
 
 #endif
