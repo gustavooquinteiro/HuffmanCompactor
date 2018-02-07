@@ -1,0 +1,41 @@
+# Changelog
+Todas as mudanças notáveis para esse projeto serão documentadas nesse arquivo.
+
+## 2018-02-07
+**ADDED**
+* Arquivo de histórico de atualizações do código: CHANGELOG
+* Arquivo .gitignore
+
+**CHANGED**
+* Atualizando o README.md com informações referentes ao código e seu próposito 
+
+## 2018-02-05
+**ADDED**  
+* Instruções de uso no README.md
+
+**CHANGED**
+* Refatorando o main.c
+* Modularizando o main.c
+
+## 2018-02-02
+
+**ADDED**  
+* Funções da fila de prioridades em minheap.c
+* Assinaturas das funções da fila de prioridades em minheap.h
+* Código-fonte do arquivo principal: main.c
+* Regra authors no Makefile
+* Arquivo AUTHORS 
+
+**REMOVED**
+* Código-fonte de fila de prioridade: priorityqueue.c
+* Cabeçalho da fila de prioridade: priorityqueue.h
+
+## 2018-01-26
+**ADDED**
+* Makefile 
+* Código-fonte de heap minimo: minheap.c
+* Cabeçalho do heap minimo: minheap.h
+* Código-fonte de fila de prioridade: priorityqueue.c
+* Cabeçalho da fila de prioridade: priorityqueue.h
+* README.md
+* LICENSE 
