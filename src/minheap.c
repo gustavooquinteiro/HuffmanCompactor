@@ -85,7 +85,7 @@ int underBounds(int value, int size){
 }
 
 int parent(int i){
-	return ceil(i	 << ONE);
+	return (i - ONE) << ONE;
 }
 
 int left(int i){

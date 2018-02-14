@@ -15,7 +15,7 @@ int main(int argumentCounter, char *argumentValues[]){
 				if (isCompactedFile(fileName))
 					decompress(archive);
 				else
-					compress(archive);
+					compress(archive, fileName);
 			}
 		}
 	} else
@@ -26,14 +26,16 @@ int main(int argumentCounter, char *argumentValues[]){
 
 void decompress(FILE * file){
 	printf("Decompressing file...\n");
-	// descompacta(file)
+	
+	// descompacta(file, filename)
 	fclose(file);
 	printf("Decompressed file\n\n");
 }
 
-void compress(FILE * file){
+void compress(FILE * file, char * filename){
 	printf("Compressing file...\n");
-	// compacta(file);
+	strcat(filename, EXTENSION);
+	// compacta(file, filename);
 	fclose(file);
 	printf("Compressed file\n\n");
 }

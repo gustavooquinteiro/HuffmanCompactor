@@ -11,7 +11,7 @@
 int main (int argumentCounter, char * argumentValues[]);
 int isValidFile(FILE * archive, char * filename);
 int isCompactedFile(char * filename);
-void compress(FILE * file);
+void compress(FILE * file, char * filename);
 void decompress(FILE * file);
 
 #endif

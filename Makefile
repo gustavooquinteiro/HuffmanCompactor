@@ -13,7 +13,7 @@ H_SOURCE = $(wildcard ./lib/*.h)
 OBJ = $(subst .c,.o,$(subst src,obj,$(C_SOURCE)))
 
 # Compilador utilizado
-# Em testes foi utilizado o gcc (GCC) 7.2.1 20180116
+# Em testes foi utilizado o gcc (GCC) 7.2.x
 CC = gcc
 
 # Flags utilizadas na compilação
@@ -23,7 +23,7 @@ CC_FLAGS = -c \
            -Wextra \
            -Werror \
            -Wpedantic \
-           -lm \
+           -lm\
 
 # Comando de construção de diretório
 MKDIR = mkdir -p
@@ -58,10 +58,15 @@ objFolder:
 # Regra de limpeza de objetos e executável
 clean:
 	@ echo -e "	Cleaning workspace... "
-	@ $(RM) obj $(PROJ_NAME) *~
+	@ $(RM) obj test/*.dcc $(PROJ_NAME) *~
 	@ echo -e "[${GREEN} OK ${NC}]  Clean workspace"
 
 # Regra para adição de autores (lembrete:: tirar essa regra antes de entregar) 
 authors:
 	@ echo -e "This is the list of $(PROJ_NAME) authors for copyright purposes:\n" > AUTHORS
 	@ git log --raw | grep "^Author: " | sort | uniq | cut -d ' ' -f2- | sed 's/^/- /' >> AUTHORS
+	
+tests: 
+	@ echo -e "	Generating test files... " 
+	@ cd test/ && python2.7 _generate_random_text.py
+	@ echo -e "[${GREEN} OK ${NC}]  Created test files"

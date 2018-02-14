@@ -22,7 +22,6 @@ void insertKey(char letter, int frequency, MinHeap * minheap);
 void insertHeap (MinHeap * minheap, char letter, int frequency);
 MinHeap * defineMinHeap(int capacity);
 void minHeapify (MinHeap * minheap, int index);
-void buildMinHeap (MinHeap * minheap, int elementsQuantity);
 void swap (PriorityQueue *x, PriorityQueue *y);
 int smaller(int a, int b);
 int underBounds(int value, int size);
@@ -31,8 +30,5 @@ int left(int i);
 int right(int i);
 int getCapacity(MinHeap * minheap);
 int getHeapSize(MinHeap * minheap);
-PriorityQueue * getArrayIn(MinHeap * minheap, int index);
-void setHeapSize(MinHeap * minheap, int heapsize);
-void setArray(MinHeap * minheap, PriorityQueue * new, int index);
 
 #endif
