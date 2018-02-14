@@ -1,6 +1,16 @@
 # Changelog
 Todas as mudanças notáveis para esse projeto serão documentadas nesse arquivo.
 
+## 2018-02-14
+**ADDED**
+* Criada função de compactar arquivos, ainda com falhas
+* Script Python para gerar arquivos com textos aleatórios: _generate_random_text.py
+* Regra no Makefile para automatizar a execução do script: `tests`
+* Adicionado macro no compress.h: COMPRESS_H
+
+**CHANGED**
+* Instruções de uso no README.md
+
 ## 2018-02-07
 **ADDED**
 * Arquivo de histórico de atualizações do código: CHANGELOG

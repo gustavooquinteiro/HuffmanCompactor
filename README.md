@@ -25,4 +25,6 @@ Todas as atualizações estão listadas em [CHANGELOG](https://github.com/gustav
 > * Os arquivos compactados estarão no diretório corrente e terão a extensão `.dcc`
 4. Para descompactar um arquivo execute: `./HuffmanCompactor arquivo.dcc`, onde `arquivo.dcc` é o nome do arquivo a ser descompactado
 > * É possível a execução da compactação e da descompactação em múltiplos arquivos em uma única execução do compactador. Para tal, execute: `./HuffmanCompactor arquivo1 arquivo2.dcc arquivo3 arquivo4.dcc`, onde o compactador entenderá, automaticamente, quais arquivos deverão ser descompactados e quais deverão ser compactados. 
-**Observação**: Coloque o nome do arquivo completo, ou seja, nome e extensão do arquivo
+**Observação**: Coloque o nome do arquivo completo, ou seja, nome e extensão do arquivo  
+
+> * Caso queira criar arquivos de textos aleatórios, para testes, utilize o comando: `make tests`. Serão criados casos de testes variando entre 1 MB e 1 GB de texto aleatório

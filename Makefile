@@ -43,7 +43,10 @@ $(PROJ_NAME): $(OBJ)
 	@ echo -e "	Building binary $@..."
 	@ $(CC) $^ -o $@
 	@ echo -e "[${GREEN} OK ${NC}]  Build complete"
-
+	@ echo -e "	Copying $(PROJ_NAME) to test folder..."
+	@ cp $(PROJ_NAME) test/
+	@ echo -e "[${GREEN} OK ${NC}]  Copied"
+	
 ./obj/%.o: ./src/%.c ./lib/%.h
 	@ echo -e "	Compiling $^ in $@..."
 	@ $(CC) $< $(CC_FLAGS) -o $@
@@ -58,15 +61,17 @@ objFolder:
 # Regra de limpeza de objetos e executável
 clean:
 	@ echo -e "	Cleaning workspace... "
-	@ $(RM) obj test/*.dcc $(PROJ_NAME) *~
+	@ $(RM) obj test/*.dcc test/$(PROJ_NAME) $(PROJ_NAME)  *~
 	@ echo -e "[${GREEN} OK ${NC}]  Clean workspace"
 
-# Regra para adição de autores (lembrete:: tirar essa regra antes de entregar) 
+# Regra para adição de autores (lembrete:: tirar essa regra antes de entregar)
 authors:
 	@ echo -e "This is the list of $(PROJ_NAME) authors for copyright purposes:\n" > AUTHORS
 	@ git log --raw | grep "^Author: " | sort | uniq | cut -d ' ' -f2- | sed 's/^/- /' >> AUTHORS
-	
+
 tests: 
 	@ echo -e "	Generating test files... " 
 	@ cd test/ && python2.7 _generate_random_text.py
 	@ echo -e "[${GREEN} OK ${NC}]  Created test files"
+	@ echo -e "	Listing test files... "
+	@ cd test/ && ls -1s --block-size=M *.in

@@ -1,4 +1,5 @@
 #include "minheap.h"
+#include "compress.h"
 #ifndef MAIN_H
 #define MAIN_H
 

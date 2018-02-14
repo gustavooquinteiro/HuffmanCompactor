@@ -8,7 +8,7 @@ int main(int argumentCounter, char *argumentValues[]){
 		register int iterator;
 		for(iterator = ONE; iterator < argumentCounter; iterator++){
 			char * fileName = argumentValues[iterator];
-			FILE * archive = fopen(fileName, READ_MODE); 
+			FILE * archive = fopen(fileName, READ_MODE);
 			if (!isValidFile(archive, fileName)) {
 				continue;
 			} else{
@@ -35,21 +35,21 @@ void decompress(FILE * file){
 void compress(FILE * file, char * filename){
 	printf("Compressing file...\n");
 	strcat(filename, EXTENSION);
-	// compacta(file, filename);
+	compacta(file, filename);
 	fclose(file);
 	printf("Compressed file\n\n");
 }
 
 int isValidFile(FILE * archive, char * filename){
-	printf("\nValidating file: %s...", filename); 
+	printf("\nValidating file: %s...", filename);
 	if (!archive) {
 		printf(" [ ERROR ]\n");
-		perror(NULL_FILE); 
+		perror(NULL_FILE);
 		return FALSE;
 	}
 	printf(" [ OK ]\n");
 	return TRUE;
-	
+
 }
 
 int isCompactedFile(char * filename){
