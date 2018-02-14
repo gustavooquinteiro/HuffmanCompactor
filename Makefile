@@ -61,7 +61,7 @@ clean:
 	@ $(RM) obj $(PROJ_NAME) *~
 	@ echo -e "[${GREEN} OK ${NC}]  Clean workspace"
 
-# Regra para adição de autores (lembrete:: tirar essa regra antes de entregar) 
+# Regra para adição de autores (lembrete:: tirar essa regra antes de entregar)
 authors:
 	@ echo -e "This is the list of $(PROJ_NAME) authors for copyright purposes:\n" > AUTHORS
 	@ git log --raw | grep "^Author: " | sort | uniq | cut -d ' ' -f2- | sed 's/^/- /' >> AUTHORS
