@@ -12,17 +12,13 @@ typedef struct heap{
 typedef struct queue{
 	int letter;
 	int frequency;
-	PriorityQueue * left;
+	PriorityQueue * left; 
 	PriorityQueue * right;
 } PriorityQueue;
 
 MinHeap * defineMinHeap(int capacity){
 	MinHeap * minimumHeap = (MinHeap *)malloc(sizeof(MinHeap));
-	minimumHeap->array = (PriorityQueue **)malloc(sizeof(PriorityQueue*)*500);
-	int i;
-	for(i=0;i<500;i++){
-	minimumHeap->array[i] = (PriorityQueue*)malloc(sizeof(PriorityQueue));
-	}
+	minimumHeap->array = (PriorityQueue **)malloc(sizeof(PriorityQueue));
 	minimumHeap->heapsize = 0;
 	minimumHeap->capacity = capacity;
 	return minimumHeap;
@@ -32,8 +28,9 @@ void minHeapify_up(MinHeap * minheap, int index){
 	if (index == ZERO)
 		return;
 	int indexParent = parent(index);
-	printf("\n--%d %d--\n", index, indexParent);
-	if (getFrequency(minheap->array[index]) < getFrequency(minheap->array[indexParent])){
+	int indexFrequency = getFrequency(minheap->array[index]);
+	int parentFrquency = getFrequency(minheap->array[indexParent]);
+	if (indexFrequency < parentFrquency){
 		swap(minheap->array[index], minheap->array[indexParent]);
 		minHeapify_up(minheap, indexParent);
 	}
@@ -42,11 +39,11 @@ void minHeapify_up(MinHeap * minheap, int index){
 void minHeapify_down(MinHeap * minheap, int index){
 	int minimum = index;
 
-	if (underBounds(left(index), minheap->heapsize))
-		minimum = smaller(getFrequency(minheap->array[minimum]),getFrequency(minheap->array[left(index)]));
+	if (underBounds(left(index), minheap->heapsize) && getFrequency(minheap->array[left(index)]) < getFrequency(minheap->array[minimum])) 
+		minimum = left(index);
 
-	if (underBounds(right(index), minheap->heapsize))
-		minimum = smaller(getFrequency(minheap->array[minimum]), getFrequency(minheap->array[right(index)]));
+	if (underBounds(right(index), minheap->heapsize) && getFrequency(minheap->array[right(index)]) < getFrequency(minheap->array[minimum]))
+		minimum = right(index);
 
 	if (minimum != index){
 		swap(minheap->array[index], minheap->array[minimum]);
@@ -55,9 +52,9 @@ void minHeapify_down(MinHeap * minheap, int index){
 }
 
 void removeHeap(MinHeap * minheap, int position){
-	swap(minheap->array[position], minheap->array[minheap->heapsize]);
-	free(minheap->array[minheap->heapsize]);
-	minheap->array[minheap->heapsize] = NULL;
+	swap(minheap->array[position], minheap->array[minheap->heapsize - ONE]);
+	free(minheap->array[minheap->heapsize - ONE]);
+	minheap->array[minheap->heapsize - ONE ] = NULL;
 	minheap->heapsize--;
 	minHeapify_down(minheap, position);
 }
@@ -68,7 +65,7 @@ void deleteHeap(MinHeap * minheap){
 }
 
 void swap(PriorityQueue *x, PriorityQueue *y){
-	printf("*****");
+	printf("*** SWAP ***");
 	PriorityQueue * tmp = x;
 	x = y;
 	y = tmp;
@@ -91,32 +88,30 @@ void swap(PriorityQueue *x, PriorityQueue *y){
 }
 
 void insertHeap (MinHeap * minheap, int letter, int frequency){
-	int i = minheap->heapsize;
-	if (i == minheap->capacity)
+	int index = minheap->heapsize;
+	if (index == minheap->capacity)
 		return;
-	minheap->array[i] = create(letter, frequency);
-	i++;
-	minheap->heapsize = i;
-	printf("\n\n%d\n\n", minheap->heapsize);
-	minHeapify_up(minheap, minheap->heapsize);
+	if (index != ZERO)
+		minheap->array = (PriorityQueue **)realloc(minheap->array, (minheap->heapsize + ONE) * sizeof(PriorityQueue));
+	minheap->array[index] = create(letter, frequency);
+	minHeapify_up(minheap, index);
+	minheap->heapsize = ++index;
+	printf("\n\nHEAP SIZE ====== %d\n\n", minheap->heapsize);
 }
 
 void insertDadHeap(MinHeap * minheap, PriorityQueue * pq){
 	int i = minheap->heapsize;
 	if (i == minheap->capacity)
 		return;
-	minheap->array[i]->letter = pq->letter;
+	/*minheap->array[i]->letter = pq->letter;
 	minheap->array[i]->frequency = pq->frequency;
 	minheap->array[i]->left=pq->left;
-	minheap->array[i]->right=pq->right;
-	printf("\n(%d)\n", pq->frequency);
+	minheap->array[i]->right=pq->right;*/
+	minheap->array[i] = pq; 
+	printf("\n DAD FREQUENCY === %d\n", pq->frequency);
 	i++;
 	minheap->heapsize = i;
 	minHeapify_up(minheap, minheap->heapsize);
-}
-
-int smaller (int a, int b){
-	return a < b? a: b;
 }
 
 int underBounds(int value, int size){
@@ -124,15 +119,16 @@ int underBounds(int value, int size){
 }
 
 int parent(int i){
-	return (i - ONE) << ONE;
+	printf("\n--INDEX == %d    INDEX DO PAI DELE ==%d--\n", i, (int)floor((i - ONE) >> ONE));
+	return (int)floor((i - ONE) >> ONE);
 }
 
 int left(int i){
-	return i >> ONE | ONE;
+	return (i << ONE); 
 }
 
 int right(int i){
-	return i >> ONE ;
+	return (i << ONE | ONE);
 }
 
 int getCapacity(MinHeap * minheap){
@@ -155,8 +151,11 @@ PriorityQueue * minimum(MinHeap * minheap){
 
 PriorityQueue  * removeMinimum(MinHeap * minheap){
 	PriorityQueue * minimal = minimum(minheap);
-	removeHeap(minheap, ZERO);
-	return minimal;
+	if (minimal){
+		removeHeap(minheap, ZERO);
+		return minimal;
+	}
+	return NULL;
 }
 
 void decreaseKey(MinHeap * minheap, int newFrequency, int position){
@@ -177,19 +176,20 @@ PriorityQueue * create (int letter, int frequency){
 PriorityQueue * createDad (PriorityQueue * left, PriorityQueue * right){
 	PriorityQueue * new = (PriorityQueue *)malloc(sizeof(PriorityQueue));
 	new->letter = 128;
-	new->frequency = left->frequency + right->frequency;
+	new->frequency = getFrequency(left) + getFrequency(right);
 	new->left = left;
 	new->right = right;
 	return new;
 }
 
 int getFrequency(PriorityQueue * queue){
-	if(queue->frequency)
+	if(queue)
 		return queue->frequency;
-	else
-		return 0;
+	return 0;
 }
 
 int getLetter(PriorityQueue * queue){
-	return queue->letter;
+	if (queue)
+		return queue->letter;
+	return 0;
 }

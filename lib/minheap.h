@@ -24,7 +24,6 @@ void insertDadHeap(MinHeap * minheap, PriorityQueue * pq);
 MinHeap * defineMinHeap(int capacity);
 void minHeapify (MinHeap * minheap, int index);
 void swap (PriorityQueue *x, PriorityQueue *y);
-int smaller(int a, int b);
 int underBounds(int value, int size);
 int parent(int i);
 int left(int i);
