@@ -3,7 +3,7 @@
 
 #define ONE 1
 #define ZERO 0
-
+#define MAX_SIZE 1000
 #define TRUE 1
 #define FALSE 0
 
@@ -21,7 +21,7 @@ int getLetter(PriorityQueue * queue);
 void insertKey(char letter, int frequency, MinHeap * minheap);
 void insertHeap (MinHeap * minheap, int letter, int frequency);
 void insertDadHeap(MinHeap * minheap, PriorityQueue * pq);
-MinHeap * defineMinHeap(int capacity);
+MinHeap * defineMinHeap();
 void minHeapify (MinHeap * minheap, int index);
 void swap (PriorityQueue *x, PriorityQueue *y);
 int underBounds(int value, int size);

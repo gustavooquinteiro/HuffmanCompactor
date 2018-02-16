@@ -4,7 +4,7 @@
 #include "../lib/minheap.h"
 
 typedef struct heap{
-	PriorityQueue ** array;
+	PriorityQueue *array[MAX_SIZE];
 	int capacity;
 	int heapsize;
 } MinHeap;
@@ -16,11 +16,10 @@ typedef struct queue{
 	PriorityQueue * right;
 } PriorityQueue;
 
-MinHeap * defineMinHeap(int capacity){
+MinHeap * defineMinHeap(){
 	MinHeap * minimumHeap = (MinHeap *)malloc(sizeof(MinHeap));
-	minimumHeap->array = (PriorityQueue **)malloc(sizeof(PriorityQueue));
 	minimumHeap->heapsize = 0;
-	minimumHeap->capacity = capacity;
+	minimumHeap->capacity = MAX_SIZE;
 	return minimumHeap;
 }
 
@@ -53,8 +52,8 @@ void minHeapify_down(MinHeap * minheap, int index){
 
 void removeHeap(MinHeap * minheap, int position){
 	swap(minheap->array[position], minheap->array[minheap->heapsize - ONE]);
-	free(minheap->array[minheap->heapsize - ONE]);
-	minheap->array[minheap->heapsize - ONE ] = NULL;
+	//free(minheap->array[minheap->heapsize - ONE]);
+	//minheap->array[minheap->heapsize - ONE ] = NULL;
 	minheap->heapsize--;
 	minHeapify_down(minheap, position);
 }
@@ -91,8 +90,6 @@ void insertHeap (MinHeap * minheap, int letter, int frequency){
 	int index = minheap->heapsize;
 	if (index == minheap->capacity)
 		return;
-	if (index != ZERO)
-		minheap->array = (PriorityQueue **)realloc(minheap->array, (minheap->heapsize + ONE) * sizeof(PriorityQueue));
 	minheap->array[index] = create(letter, frequency);
 	minHeapify_up(minheap, index);
 	minheap->heapsize = ++index;
