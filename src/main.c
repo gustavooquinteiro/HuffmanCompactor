@@ -26,10 +26,9 @@ int main(int argumentCounter, char *argumentValues[]){
 
 void decompress(FILE * file){
 	printf("Decompressing file...\n");
-	
-	// descompacta(file, filename)
+	// descompacta(file, finalFileName)
 	fclose(file);
-	printf("Decompressed file\n\n");
+	printf("Decompressed file\n");
 }
 
 void compress(FILE * file, char * filename){
@@ -37,24 +36,22 @@ void compress(FILE * file, char * filename){
 	strcat(filename, EXTENSION);
 	compacta(file, filename);
 	fclose(file);
-	printf("Compressed file\n\n");
+	printf("Generated compressed file\n");
 }
 
-int isValidFile(FILE * archive, char * filename){
+void * isValidFile(FILE * archive, char * filename){
 	printf("\nValidating file: %s...", filename);
-	if (!archive) {
+	if (!archive){
 		printf(" [ ERROR ]\n");
 		perror(NULL_FILE);
-		return FALSE;
-	}
+	} 
 	printf(" [ OK ]\n");
-	return TRUE;
-
+	return archive;
 }
 
-int isCompactedFile(char * filename){
+void * isCompactedFile(char * filename){
 	char * extension = strstr(filename, EXTENSION);
-	if (extension && strcmp(extension, EXTENSION)== ZERO)
-		return TRUE;
-	return FALSE;
+	if (extension && strcmp(extension, EXTENSION) == ZERO)
+		return extension;
+	return NULL;
 }

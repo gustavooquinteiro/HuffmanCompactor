@@ -4,8 +4,6 @@
 #define ONE 1
 #define ZERO 0
 #define MAX_SIZE 1000
-#define TRUE 1
-#define FALSE 0
 
 typedef struct heap MinHeap;
 typedef struct queue PriorityQueue;
@@ -25,9 +23,9 @@ MinHeap * defineMinHeap();
 void minHeapify (MinHeap * minheap, int index);
 void swap (PriorityQueue *x, PriorityQueue *y);
 int underBounds(int value, int size);
-int parent(int i);
-int left(int i);
-int right(int i);
+int parent(int index);
+int left(int index);
+int right(int index);
 int getCapacity(MinHeap * minheap);
 int getHeapSize(MinHeap * minheap);
 

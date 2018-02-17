@@ -10,8 +10,8 @@
 #define EXTENSION ".dcc"
 
 int main (int argumentCounter, char * argumentValues[]);
-int isValidFile(FILE * archive, char * filename);
-int isCompactedFile(char * filename);
+void * isValidFile(FILE * archive, char * filename);
+void * isCompactedFile(char * filename);
 void compress(FILE * file, char * filename);
 void decompress(FILE * file);
 
