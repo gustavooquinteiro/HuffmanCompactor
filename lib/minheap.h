@@ -3,7 +3,7 @@
 
 #define ONE 1
 #define ZERO 0
-#define MAX_SIZE 1000
+#define MAX_SIZE 128
 #define TRUE 1
 #define FALSE 0
 

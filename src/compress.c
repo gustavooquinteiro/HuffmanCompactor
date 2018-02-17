@@ -17,7 +17,21 @@ typedef struct queue{
     PriorityQueue * right;
 } PriorityQueue;
 
+
+void imprimir_arvore(PriorityQueue * arvore){
+    if(arvore==NULL){
+        return;
+    }
+    imprimir_arvore(arvore->left);
+    printf("ppppppppppppppp %d\n", arvore->letter);
+    imprimir_arvore(arvore->right);
+}
 void imprime_codigos(int matriz_conferencia[][TAMANHO_ALFABETO], FILE * file, PriorityQueue * arvore, int alfabeto[], int topo){
+    matriz_conferencia=matriz_conferencia;
+    file=file;
+    alfabeto=alfabeto;
+    topo=topo;
+    /*printf("*entrei\n");
     if(arvore->left != NULL){
         alfabeto[topo]=0;
         imprime_codigos(matriz_conferencia,file,arvore, alfabeto, topo+1);
@@ -37,7 +51,9 @@ void imprime_codigos(int matriz_conferencia[][TAMANHO_ALFABETO], FILE * file, Pr
         }
         fprintf(file,"\n");
         matriz_conferencia[arvore->letter][i]='\0';
-    }
+    }*/
+
+    imprimir_arvore(arvore);
 }
 
 long calcula_tamanho(FILE * file){
@@ -53,14 +69,15 @@ void compacta(FILE * file, char * fileName){
     long quantidade_compressoes;
     FILE * saida;
     char buffer[SIZE_COMPRESSION];
-    int frequencia[TAMANHO_ALFABETO];
-    MinHeap * meu_heap = defineMinHeap(500);
+    int frequencia[TAMANHO_ALFABETO]={0};
+    MinHeap * meu_heap = defineMinHeap(128);
     int i;
     int c;
     //prerrogativas
+    frequencia[0]=frequencia[0];
     for(i=0;i<TAMANHO_ALFABETO;i++)
         frequencia[i]=0;
-    //info do cabrcalho
+    //info do cabrecalho
     tamanho=calcula_tamanho(file);
     float valor = (tamanho*1.0)/(SIZE_COMPRESSION);
     quantidade_compressoes = (int) ceil ((int)valor) + 1;
@@ -75,28 +92,35 @@ void compacta(FILE * file, char * fileName){
 
 
     while(fgets(buffer, SIZE_COMPRESSION, file) !=NULL){
+        //mede frequencia do trecho
         for(i=0;i<SIZE_COMPRESSION;i++){
             if(buffer[i]=='\0'){
-                printf("\n*\n");
                 break;
             }
             int teste = (int) buffer[i];
             frequencia[teste]++;
         }
+
+        for(i=0;i<TAMANHO_ALFABETO;i++){
+            printf("%d %d\n", i, frequencia[i]);
+        }
+        //quantidade_frequencia informa quantas letras distintas existem no alfabeto
         int quantidade_frequencia=0;
         for(c=0;c<TAMANHO_ALFABETO;c++){
-            if(frequencia[c]!=0){
+            if(frequencia[c]>0){
                 quantidade_frequencia++;
+                printf("%d %d\n", c, frequencia[c]);
                 insertHeap(meu_heap, c, frequencia[c]);
             }
         }
 
         fprintf(saida, "%d %d\n", TAMANHO_ALFABETO, quantidade_frequencia);
 
-        while(getHeapSize(meu_heap) !=1){
+        while(getHeapSize(meu_heap) != 1){
             PriorityQueue * left = removeMinimum(meu_heap);
+            printf("bbbbbbbbbb%d\n", left->letter);
             PriorityQueue * right = removeMinimum(meu_heap);
-
+            printf("bbbbbbbbbb%d\n", right->letter);
             PriorityQueue * dad = createDad(left,right);
             insertDadHeap(meu_heap, dad);
         }
