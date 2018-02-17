@@ -61,7 +61,7 @@ objFolder:
 # Regra de limpeza de objetos e executável
 clean:
 	@ echo -e "	Cleaning workspace... "
-	@ $(RM) obj test/*.dcc test/vgcore.* test/$(PROJ_NAME) $(PROJ_NAME)  *~
+	@ $(RM) obj test/*.dcc test/vgcore.* test/$(PROJ_NAME) $(PROJ_NAME) vgcore.* *~
 	@ echo -e "[${GREEN} OK ${NC}]  Clean workspace"
 
 # Regra para adição de autores (lembrete:: tirar essa regra antes de entregar)
@@ -71,7 +71,7 @@ authors:
 
 tests: 
 	@ echo -e "	Generating test files... " 
-	@ cd test/ && python2.7 _generate_random_text.py
+	@ python2.7 test/_generate_random_text.py
 	@ echo -e "[${GREEN} OK ${NC}]  Created test files"
 	@ echo -e "	Listing test files... "
-	@ cd test/ && ls -1s --block-size=M *.in
+	@ ls -1hs test/*.in

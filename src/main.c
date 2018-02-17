@@ -35,6 +35,26 @@ void compress(FILE * file, char * filename){
 	printf("Compressing file...\n");
 	strcat(filename, EXTENSION);
 	compacta(file, filename);
+	/*MinHeap * meu_heap = defineMinHeap(128);
+	insertHeap(meu_heap, 12, 10);
+	insertHeap(meu_heap, 122, 20);
+	insertHeap(meu_heap, 32, 34);
+	insertHeap(meu_heap, 52, 29);
+	insertHeap(meu_heap, 62, 11);
+	insertHeap(meu_heap, 72, 28);
+	printf("VAI REMOVER\n");
+	removeMinimum(meu_heap);
+	printf("VAI REMOVER\n");
+	removeMinimum(meu_heap);
+	
+	insertHeap(meu_heap, 45, 8);
+	insertHeap(meu_heap, 41, 5);
+	insertHeap(meu_heap, 89, 2);
+	insertHeap(meu_heap, 42, 3);
+	printf("VAI REMOVER\n");
+	removeMinimum(meu_heap);
+	printf("VAI REMOVER\n");
+	removeMinimum(meu_heap);*/
 	fclose(file);
 	printf("Generated compressed file\n");
 }

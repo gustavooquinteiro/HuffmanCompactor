@@ -3,7 +3,11 @@
 
 #define ONE 1
 #define ZERO 0
-#define MAX_SIZE 1000
+
+#define MAX_SIZE 128
+#define TRUE 1
+#define FALSE 0
+
 
 typedef struct heap MinHeap;
 typedef struct queue PriorityQueue;
@@ -21,7 +25,7 @@ void insertHeap (MinHeap * minheap, int letter, int frequency);
 void insertDadHeap(MinHeap * minheap, PriorityQueue * pq);
 MinHeap * defineMinHeap();
 void minHeapify (MinHeap * minheap, int index);
-void swap (PriorityQueue *x, PriorityQueue *y);
+void swap (PriorityQueue **x, PriorityQueue **y);
 int underBounds(int value, int size);
 int parent(int index);
 int left(int index);

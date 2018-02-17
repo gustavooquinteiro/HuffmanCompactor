@@ -1,6 +1,10 @@
 # Changelog
 Todas as mudanças notáveis para esse projeto serão documentadas nesse arquivo.
 
+## 2018-02-17
+**FIXED**
+* TAD do heap mínimo
+
 ## 2018-02-14
 **ADDED**
 * Criada função de compactar arquivos, ainda com falhas
