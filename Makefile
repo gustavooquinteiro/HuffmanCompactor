@@ -64,14 +64,6 @@ clean:
 	@ $(RM) obj test/*.dcc test/vgcore.* test/$(PROJ_NAME) $(PROJ_NAME) vgcore.* *~
 	@ echo -e "[${GREEN} OK ${NC}]  Clean workspace"
 
-# Regra para adição de autores (lembrete:: tirar essa regra antes de entregar)
-authors:
-	@ echo -e "This is the list of $(PROJ_NAME) authors for copyright purposes:\n" > AUTHORS
-	@ git log --raw | grep "^Author: " | sort | uniq | cut -d ' ' -f2- | sed 's/^/- /' >> AUTHORS
+tests-cases: 
+	@ cd test/ && python2.7 _generate_random_text.py
 
-tests: 
-	@ echo -e "	Generating test files... " 
-	@ python2.7 test/_generate_random_text.py
-	@ echo -e "[${GREEN} OK ${NC}]  Created test files"
-	@ echo -e "	Listing test files... "
-	@ ls -1hs test/*.in

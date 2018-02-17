@@ -21,10 +21,11 @@ Todas as atualizações estão listadas em [CHANGELOG](https://github.com/gustav
 ## Modo de usar
 1. Abra um terminal na pasta do compactador 
 2. Compile os arquivos com o comando `make`
+> * **Observação**: Uma cópia do binário compilado estará disponível no diretório *test/* para facilitar testes. Então é só você mudar para o diretório de testes com o comando `cd test/`
 3. Para compactar um arquivo execute: `./HuffmanCompactor arquivo`, onde `arquivo` é o nome do arquivo a ser compactado 
 > * Os arquivos compactados estarão no diretório corrente e terão a extensão `.dcc`
 4. Para descompactar um arquivo execute: `./HuffmanCompactor arquivo.dcc`, onde `arquivo.dcc` é o nome do arquivo a ser descompactado
 > * É possível a execução da compactação e da descompactação em múltiplos arquivos em uma única execução do compactador. Para tal, execute: `./HuffmanCompactor arquivo1 arquivo2.dcc arquivo3 arquivo4.dcc`, onde o compactador entenderá, automaticamente, quais arquivos deverão ser descompactados e quais deverão ser compactados. 
 **Observação**: Coloque o nome do arquivo completo, ou seja, nome e extensão do arquivo  
 
-> * Caso queira criar arquivos de textos aleatórios, para testes, utilize o comando: `make tests`. Serão criados casos de testes variando entre 1 MB e 1 GB de texto aleatório
+> * Caso queira criar arquivos de textos aleatórios, para testes, utilize o comando: `make tests-cases`. Serão criados casos de testes variando entre 1 GB e 2 GB de texto aleatório no diretório `test/`
