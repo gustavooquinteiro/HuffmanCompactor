@@ -66,4 +66,5 @@ clean:
 
 tests-cases: 
 	@ cd test/ && python2.7 _generate_random_text.py
+	@ echo -e -n "[${GREEN} OK ${NC}]  Created tests cases in " && cd test/ && pwd 
 

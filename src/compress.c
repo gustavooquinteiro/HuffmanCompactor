@@ -26,7 +26,7 @@ void imprimir_arvore(PriorityQueue * arvore){
     printf("ppppppppppppppp %d\n", arvore->letter);
     imprimir_arvore(arvore->right);
 }
-void imprime_codigos(int matriz_conferencia[][TAMANHO_ALFABETO], FILE * file, PriorityQueue * arvore, int alfabeto[], int topo){
+void imprime_codigos(int matriz_conferencia[][TAMANHO_ALFABETO], FILE * file, PriorityQueue arvore, int alfabeto[], int topo){
     matriz_conferencia=matriz_conferencia;
     file=file;
     alfabeto=alfabeto;
@@ -53,7 +53,7 @@ void imprime_codigos(int matriz_conferencia[][TAMANHO_ALFABETO], FILE * file, Pr
         matriz_conferencia[arvore->letter][i]='\0';
     }*/
 
-    imprimir_arvore(arvore);
+    imprimir_arvore(&arvore);
 }
 
 long calcula_tamanho(FILE * file){
@@ -113,15 +113,15 @@ void compacta(FILE * file, char * fileName){
         fprintf(saida, "%d %d\n", TAMANHO_ALFABETO, quantidade_frequencia);
 
         while(getHeapSize(meu_heap) != 1){
-            PriorityQueue * left = removeMinimum(meu_heap);
-            printf("bbbbbbbbbb%d\n", left->letter);
-            PriorityQueue * right = removeMinimum(meu_heap);
-            printf("bbbbbbbbbb%d\n", right->letter);
-            PriorityQueue * dad = createDad(left,right);
+            PriorityQueue left = removeMinimum(meu_heap);
+            printf("bbbbbbbbbb%d\n", left.letter);
+            PriorityQueue right = removeMinimum(meu_heap);
+            printf("bbbbbbbbbb%d\n", right.letter);
+            PriorityQueue dad = createDad(left,right);
             insertDadHeap(meu_heap, dad);
         }
 
-        PriorityQueue * arvore = removeMinimum(meu_heap);
+        PriorityQueue arvore = removeMinimum(meu_heap);
         int alfabeto[TAMANHO_ALFABETO];
         int matriz_conferencia[TAMANHO_ALFABETO][TAMANHO_ALFABETO];
         int topo=0;

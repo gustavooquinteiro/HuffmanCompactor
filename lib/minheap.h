@@ -12,20 +12,20 @@
 typedef struct heap MinHeap;
 typedef struct queue PriorityQueue;
 
-PriorityQueue * minimum(MinHeap * minheap);
-PriorityQueue  * removeMinimum(MinHeap * minheap);
-PriorityQueue * create (int letter, int frequency);
-PriorityQueue * createDad (PriorityQueue * left, PriorityQueue * right);
+PriorityQueue minimum(MinHeap * minheap);
+PriorityQueue removeMinimum(MinHeap * minheap);
+PriorityQueue create (int letter, int frequency);
+PriorityQueue createDad (PriorityQueue left, PriorityQueue right);
 void decreaseKey(MinHeap * minheap, int newFrequency, int position);
-int getFrequency(PriorityQueue * queue);
-int getLetter(PriorityQueue * queue);
+int getFrequency(PriorityQueue queue);
+int getLetter(PriorityQueue queue);
 
 void insertKey(char letter, int frequency, MinHeap * minheap);
 void insertHeap (MinHeap * minheap, int letter, int frequency);
-void insertDadHeap(MinHeap * minheap, PriorityQueue * pq);
+void insertDadHeap(MinHeap * minheap, PriorityQueue pq);
 MinHeap * defineMinHeap();
 void minHeapify (MinHeap * minheap, int index);
-void swap (PriorityQueue **x, PriorityQueue **y);
+void swap (PriorityQueue *x, PriorityQueue *y);
 int underBounds(int value, int size);
 int parent(int index);
 int left(int index);
